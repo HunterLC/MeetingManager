@@ -194,8 +194,7 @@ public class MainActivity extends AppCompatActivity {
                         //监听方法实现
                         int choose = (int)drawerItem.getIdentifier();
                         switch(choose){
-                            case 2:Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                                   startActivity(intent);
+                            case 2:mViewPager.getViewPager().setCurrentItem(2);
                                 break;//个人信息
                             case 3:mViewPager.getViewPager().setCurrentItem(1);//参会记录
                                 break;

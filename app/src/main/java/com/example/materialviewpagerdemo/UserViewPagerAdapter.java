@@ -11,37 +11,48 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserViewPagerAdapter extends RecyclerView.Adapter<UserViewPagerAdapter.mViewHolder>{
 
     Context context;
-    List<MeetingInfo> newList;
-    public UserViewPagerAdapter(List<MeetingInfo> newList) {
-        this.newList = newList;
+    UserInfo newUser;
+    List<String> userList = new ArrayList<>();
+    List<String> label = new ArrayList<>();  //信息标签
+    public UserViewPagerAdapter(List<String> userList) {
+        this.userList = userList;
+        initLabelList();
     }
 
+    public void initLabelList(){
+        label.add("我的头像");
+        label.add("我的编号");
+        label.add("我的姓名");
+        label.add("我的职称");
+        label.add("我的昵称");
+        label.add("我的性别");
+    }
     static class mViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
-        TextView title,speaker,time,location;
-        ImageView img;
+        TextView title,decription;
+        ImageView faceimg,picture;
 
         public mViewHolder(View itemView) {
             super(itemView);
             //拿到所有控件
-            cardView= itemView.findViewById(R.id.card_view);
-            img= itemView.findViewById(R.id.meeting_img);
-            title= itemView.findViewById(R.id.meeting_title);
-            speaker= itemView.findViewById(R.id.meeting_speaker);
-            time = itemView.findViewById(R.id.meeting_time);
-            location = itemView.findViewById(R.id.meeting_location);
+            cardView= itemView.findViewById(R.id.userinfo_card_view);
+            title = itemView.findViewById(R.id.userinfo_title);
+            decription = itemView.findViewById(R.id.userinfo_description);
+            faceimg = itemView.findViewById(R.id.userinfo_faceimg);
+            picture = itemView.findViewById(R.id.userinfo_picture);
         }
     }
 
     @Override
     public mViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.content_cardview,parent,false);//加载item_cardView布局
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.content_infoview,parent,false);//加载item_cardView布局
         mViewHolder holder=new mViewHolder(v);//加入内部类
         Log.i("suc","布局载入成功");
         return holder;
@@ -50,17 +61,26 @@ public class UserViewPagerAdapter extends RecyclerView.Adapter<UserViewPagerAdap
     @Override
     public void onBindViewHolder(mViewHolder holder, int position) {
         int i=position;
-        holder.img.setImageResource(newList.get(i).getImg());
-        holder.title.setText(newList.get(i).getTitle());
-        holder.speaker.setText(newList.get(i).getSpeaker());
-        holder.time.setText(newList.get(i).getTime());
-        holder.location.setText(newList.get(i).getLocation());
+        holder.title.setText(label.get(i));
+        if(label.get(i).equals("我的头像"))
+           // holder.faceimg.setImageBitmap(userList.get(i).getImg())
+            ;
+        else
+            holder.faceimg.setImageBitmap(null);
+        if(!label.get(i).equals("我的头像"))
+            holder.decription.setText(userList.get(i));
+        else
+            holder.decription.setText("");
+        if(label.get(i).equals("我的编号")||label.get(i).equals("我的姓名")||label.get(i).equals("我的职称"))
+            holder.picture.setImageBitmap(null);
+        else
+            ;
 
     }
 
     @Override
     public int getItemCount() {
-        return newList.size();
+        return userList.size();
     }
 
 }
