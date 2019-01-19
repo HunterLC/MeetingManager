@@ -25,9 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
         <activity android:name=".RecyclerViewFragment" />
-        <activity android:name=".MeetingDetailActivity"></activity>
+        <activity android:name=".MeetingDetailActivity" />
+        <activity android:name=".MessageActivity"></activity>
     </application>
 
 </manifest>

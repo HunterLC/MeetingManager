@@ -119,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.action_information:
                        Toast.makeText(MainActivity.this,"你点击了消息通知",Toast.LENGTH_SHORT).show();
+                       Intent intent = new Intent(MainActivity.this,MessageActivity.class);
+                       startActivity(intent);
+
                         break;
                 }
                 return false;
