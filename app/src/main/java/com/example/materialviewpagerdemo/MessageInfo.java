@@ -5,13 +5,6 @@ import java.util.Date;
 
 public class MessageInfo {//消息信息
     private  String  username;//用户名
-
-    public MessageInfo(String title, String content, Date curdate) {
-        this.title = title;
-        this.content = content;
-        this.curdate = curdate;
-    }
-
     private  int     message_id;//消息id
     private  String  title;//消息标题
     private boolean  readed;//是否已读
@@ -19,6 +12,11 @@ public class MessageInfo {//消息信息
     private SimpleDateFormat   formatter   =   new   SimpleDateFormat   ("yyyy年MM月dd日   HH:mm:ss");
     private Date curdate;//当前时间
 
+    public MessageInfo(String title, String content, Date curdate) {
+        this.title = title;
+        this.content = content;
+        this.curdate = curdate;
+    }
     public MessageInfo(String username, int message_id, String title, boolean readed, String content, Date curdate) {
         this.username = username;
         this.message_id = message_id;

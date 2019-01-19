@@ -4,68 +4,72 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true">
+
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/message_view"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginBottom="@dimen/cardMarginVertical"
+        android:layout_height="140dp"
         android:layout_marginLeft="@dimen/cardMarginHorizontal"
-        android:layout_marginRight="@dimen/cardMarginHorizontal"
         android:layout_marginTop="@dimen/cardMarginVertical"
+        android:layout_marginRight="@dimen/cardMarginHorizontal"
+        android:layout_marginBottom="@dimen/cardMarginVertical"
+        android:clickable="true"
+        android:fitsSystemWindows="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:cardCornerRadius="2dp"
         app:cardElevation="5dp"
         app:cardPreventCornerOverlap="false"
-        android:fitsSystemWindows="true"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:contentPadding="10dp">
+
         <LinearLayout
             android:id="@+id/message_linearlayout1"
             android:layout_width="match_parent"
+            android:layout_marginTop="14dp"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/message_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:textColor="@color/cardview_dark_background"
                 android:layout_weight="4"
-                android:text="会议提醒"/>
+                android:paddingTop="8dp"
+                android:text="会议提醒"
+                android:textColor="@color/cardview_dark_background" />
+
             <TextView
                 android:id="@+id/message_curtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="当前时间"
-                />
+                android:text="2019-1-19-19:43" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="30dp"
-            >
+            android:paddingTop="50dp">
+
             <TextView
                 android:id="@+id/message_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="3"
-                android:text="亲，你有一个会议即将在五分钟后开始，请及时参加！"
-                />
+                android:text="亲，你有一个会议即将在五分钟后开始，请及时参加！" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="90dp"
+            android:paddingTop="90dp">
 
-            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_marginStart="270dp"
-                android:textColor="@color/md_green_700"
-                android:text="查看详情"/>
+                android:gravity="center"
+                android:text="查看详情"
+                android:textColor="@color/md_green_700" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </FrameLayout>

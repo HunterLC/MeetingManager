@@ -53,7 +53,7 @@ public class HistoryViewPagerAdapter extends RecyclerView.Adapter<HistoryViewPag
                 MeetingInfo meetingInfo = newList.get(position);
                 Intent intent = new Intent(context,MeetingDetailActivity.class);
                 intent.putExtra(MeetingDetailActivity.ROOM_NAME,meetingInfo.getTitle());
-                intent.putExtra(MeetingDetailActivity.ROOM_IMAGE_ID,meetingInfo.getImg());
+                intent.putExtra(MeetingDetailActivity.ROOM_IMAGE_ID,meetingInfo.getId());
                 context.startActivity(intent);
             }
         });
@@ -64,11 +64,11 @@ public class HistoryViewPagerAdapter extends RecyclerView.Adapter<HistoryViewPag
     @Override
     public void onBindViewHolder(mViewHolder holder, int position) {
         int i=position;
-        holder.img.setImageResource(newList.get(i).getImg());
+        holder.img.setImageResource(newList.get(i).getId());
         holder.title.setText(newList.get(i).getTitle());
-        holder.speaker.setText(newList.get(i).getSpeaker());
-        holder.time.setText(newList.get(i).getTime());
-        holder.location.setText(newList.get(i).getLocation());
+        holder.speaker.setText(newList.get(i).getSponsor());
+        holder.time.setText(String.valueOf(newList.get(i).getStartTime()));
+        holder.location.setText(newList.get(i).getId());
 
     }
 
