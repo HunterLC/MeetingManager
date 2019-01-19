@@ -1,6 +1,7 @@
 package com.example.materialviewpagerdemo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,8 +42,21 @@ public class HistoryViewPagerAdapter extends RecyclerView.Adapter<HistoryViewPag
 
     @Override
     public mViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.content_cardview,parent,false);//加载item_cardView布局
-        mViewHolder holder=new mViewHolder(v);//加入内部类
+        if(context == null)
+            context = parent.getContext();
+        View v= LayoutInflater.from(context).inflate(R.layout.content_cardview,parent,false);//加载item_cardView布局
+        final mViewHolder holder=new mViewHolder(v);//加入内部类
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                MeetingInfo meetingInfo = newList.get(position);
+                Intent intent = new Intent(context,MeetingDetailActivity.class);
+                intent.putExtra(MeetingDetailActivity.ROOM_NAME,meetingInfo.getTitle());
+                intent.putExtra(MeetingDetailActivity.ROOM_IMAGE_ID,meetingInfo.getImg());
+                context.startActivity(intent);
+            }
+        });
         Log.i("suc","布局载入成功");
         return holder;
     }

@@ -25,15 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".MainActivity"/>
-        <activity
-            android:name=".RecyclerViewFragment" />
-        <activity
-            android:name=".RecyclerViewPagerAdapter"
-            android:theme="@style/ImageTranslucentTheme" />
-
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".RecyclerViewFragment" />
+        <activity android:name=".MeetingDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -14,5 +14,6 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
     <style name="action_menu_information">通知</style>
 </resources>

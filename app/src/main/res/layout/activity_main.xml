@@ -1,28 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:fitsSystemWindows="true"
     >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/AppBaseTheme"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:fitsSystemWindows="true"/>
 
 
     <com.github.florent37.materialviewpager.MaterialViewPager
         android:id="@+id/materialViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         app:viewpager_logo="@layout/header_logo"
         app:viewpager_logoMarginTop="100dp"
         app:viewpager_color="@color/colorPrimary"
@@ -40,4 +30,4 @@
 
         />
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>
