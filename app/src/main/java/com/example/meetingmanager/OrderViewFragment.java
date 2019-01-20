@@ -8,15 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.github.florent37.materialviewpager.header.MaterialViewPagerHeaderDecorator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class OrderViewFragment extends Fragment {
-    public static Fragment newHistoryInstance(){
-        return  new RecyclerViewFragment();
+    public static Fragment newOrderInstance(){
+        return  new OrderViewFragment();
     }
 
 
@@ -33,7 +31,7 @@ public class OrderViewFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new MaterialViewPagerHeaderDecorator());
-        //mRecyclerView.setAdapter(new HistoryViewPagerAdapter(items));
+        mRecyclerView.setAdapter(new OrderViewPagerAdapter());
     }
 
 }

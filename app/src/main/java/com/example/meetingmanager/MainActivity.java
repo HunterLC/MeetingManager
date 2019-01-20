@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 switch (position % TAPS) {
                     case 0:
-                        return new Fragment();
+                        return new OrderViewFragment();
                     case 1:
                         return RecyclerViewFragment.newHistoryInstance();
                     case 2:
@@ -201,6 +201,9 @@ public class MainActivity extends AppCompatActivity {
                                 break;//个人信息
                             case 3:mViewPager.getViewPager().setCurrentItem(1);//参会记录
                                 break;
+                            case 5:
+                                Intent intent = new Intent(MainActivity.this,RoomSelectionActivity.class);
+                                startActivity(intent);
                             default:
                                 Toast.makeText(MainActivity.this, drawerItem.getIdentifier() + " is clicked", Toast.LENGTH_SHORT).show();
                                 break;
@@ -334,15 +337,15 @@ public class MainActivity extends AppCompatActivity {
                 .withBadge("10") //设置圆角气泡中的数字
                 .withBadgeStyle(new BadgeStyle().withTextColor(Color.WHITE).withColorRes(R.color.md_light_blue_A700))
                 .withSubItems(
-                        new SecondaryDrawerItem().withName("关于我们").withIdentifier(4),
-                        new SecondarySwitchDrawerItem().withName("软件自启").withIdentifier(5)
+                        new SecondaryDrawerItem().withName("关于我们").withIdentifier(5),
+                        new SecondarySwitchDrawerItem().withName("软件自启").withIdentifier(6)
                 ); //内部item
         return expandableItem_setting;
     }
     private SwitchDrawerItem setSwitchItem1(){
         switchItem1=new SwitchDrawerItem()
                // .withIcon(R.drawable.profile3)
-                .withIdentifier(6)
+                .withIdentifier(7)
                 .withCheckable(false)
                 .withOnCheckedChangeListener(checkedChangeListener)
                 .withName("开关1");
@@ -351,7 +354,7 @@ public class MainActivity extends AppCompatActivity {
     private SwitchDrawerItem setSwitchItem2(){
         switchItem2=new SwitchDrawerItem()
                 //.withIcon(R.drawable.profile4)
-                .withIdentifier(7)
+                .withIdentifier(8)
                 .withCheckable(true)
                 .withOnCheckedChangeListener(checkedChangeListener)
                 .withName("开关2");
