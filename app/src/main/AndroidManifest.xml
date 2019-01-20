@@ -31,8 +31,11 @@
         <activity
             android:name=".MessageActivity"
             android:label="我的消息"
-            android:theme="@style/AppBaseTheme"></activity>
-        <activity android:name=".RoomSelectionActivity"></activity>
+            android:theme="@style/AppBaseTheme" />
+        <activity android:name=".RoomSelectionActivity" />
+        <activity android:name=".SpinnerActivity"
+            android:theme="@style/AppBaseTheme">
+        </activity>
     </application>
 
 </manifest>

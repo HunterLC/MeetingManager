@@ -11,5 +11,7 @@
     <color name="material_drawer_selected_text">@color/md_white_1000</color>
     <color name="btn_press">#ff336BA3</color>
     <color name="material_drawer_header_selection_text">@color/material_drawer_dark_primary_text
-    </color>
+</color>
+    <color name="spinner_base_color">#44000000</color>
+    <color name="spinner_hint_text_color">#ffffcc</color>
 </resources>

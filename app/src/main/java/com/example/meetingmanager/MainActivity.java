@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                             case 3:mViewPager.getViewPager().setCurrentItem(1);//参会记录
                                 break;
                             case 5:
-                                Intent intent = new Intent(MainActivity.this,RoomSelectionActivity.class);
+                                Intent intent = new Intent(MainActivity.this,SpinnerActivity.class);
                                 startActivity(intent);
                             default:
                                 Toast.makeText(MainActivity.this, drawerItem.getIdentifier() + " is clicked", Toast.LENGTH_SHORT).show();
