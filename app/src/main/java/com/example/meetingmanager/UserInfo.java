@@ -1,4 +1,4 @@
-package com.example.materialviewpagerdemo;
+package com.example.meetingmanager;
 
 public class UserInfo {
     private String avatar;//用户头像

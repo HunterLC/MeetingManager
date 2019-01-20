@@ -1,4 +1,4 @@
-package com.example.materialviewpagerdemo;
+package com.example.meetingmanager;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;

@@ -1,4 +1,4 @@
-package com.example.materialviewpagerdemo;
+package com.example.meetingmanager;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

@@ -1,4 +1,4 @@
-package com.example.materialviewpagerdemo;
+package com.example.meetingmanager;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

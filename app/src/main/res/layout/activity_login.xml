@@ -83,7 +83,7 @@
         android:text="sign in"
         android:textColor="@android:color/white"/>
 
-    <com.example.materialviewpagerdemo.TransitionView
+    <com.example.meetingmanager.TransitionView
         android:id="@+id/ani_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

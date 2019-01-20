@@ -2,8 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_search"
+        android:title="搜索"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@drawable/action_search"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_information"
-        android:icon="@drawable/action_information"
+        android:icon="@drawable/action_information_24dp"
         android:title="通知"
         app:showAsAction="always"/>
 </menu>

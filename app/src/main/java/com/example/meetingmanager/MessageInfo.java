@@ -1,4 +1,4 @@
-package com.example.materialviewpagerdemo;
+package com.example.meetingmanager;
 
 import   java.text.SimpleDateFormat;
 import java.util.Date;

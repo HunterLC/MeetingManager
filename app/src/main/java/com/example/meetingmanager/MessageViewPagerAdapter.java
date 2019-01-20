@@ -1,4 +1,4 @@
-package com.example.materialviewpagerdemo;
+package com.example.meetingmanager;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
