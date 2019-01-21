@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -38,6 +39,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
+import fr.ganfra.materialspinner.MaterialSpinner;
+
 public class MainActivity extends AppCompatActivity {
     private MaterialViewPager mViewPager;
     private Drawer mainDrawer = null;
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private SwitchDrawerItem switchItem1 = null;//带有switch开关的item1
     private SwitchDrawerItem switchItem2 = null;//带有switch开关的item2
     private Drawer result = null;//嵌套抽屉
+
 
     /**
      * toolbar联动菜单
@@ -214,9 +218,6 @@ public class MainActivity extends AppCompatActivity {
                 .withDrawerGravity(Gravity.LEFT) //设置抽屉打开方向默认从左，end从右侧打开
                 //.append(result)
                 .build();
-
-
-
 
     }
     @Override

@@ -13,11 +13,10 @@ import android.widget.Button;
 public class OrderViewPagerAdapter extends RecyclerView.Adapter<OrderViewPagerAdapter.mViewHolder>{
 
     Context context;
-
-
     static class mViewHolder extends RecyclerView.ViewHolder {
 
         Button button;
+
 
         public mViewHolder(View itemView) {
             super(itemView);
@@ -28,6 +27,7 @@ public class OrderViewPagerAdapter extends RecyclerView.Adapter<OrderViewPagerAd
             faceimg = itemView.findViewById(R.id.userinfo_faceimg);
             picture = itemView.findViewById(R.id.userinfo_picture);*/
             button = itemView.findViewById(R.id.meeting_commit);
+
 
         }
     }
