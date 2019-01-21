@@ -139,16 +139,18 @@
                             android:textSize="15sp"/>
 
                         <TextView
-                            android:id="@+id/roomselection_content_choose_number"
+                            android:id="@+id/roomselection_content_shownumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="30 人"
-                            android:layout_weight="6"/>
+                            android:layout_weight="8"/>
 
-                        <ImageView
-                            android:id="@+id/roomselection_content_choose_people"
+                        <Button
+                            android:id="@+id/roomselection_content_choose_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="选择人数"
+                            android:background="@drawable/selector_btn_bg"
                             android:layout_weight="1"/>
 
                     </LinearLayout>
@@ -170,32 +172,38 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="9208"
-                            android:layout_weight="6"/>
+                            android:layout_weight="7"/>
 
-                        <ImageView
+                        <Button
                             android:id="@+id/roomselection_content_choose_room"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="选择房间"
+                            android:background="@drawable/selector_btn_bg"
                             android:layout_weight="1"/>
 
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:layout_margin="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="参会人员"
+                            android:layout_weight="8"
                             android:textSize="15sp"/>
-                        <Spinner
-                            android:id="@+id/roomselection_content_participator"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        <Button
+                            android:id="@+id/roomselection_content_choose_participator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="添加人员"
+                            android:background="@drawable/selector_btn_bg"
+                            android:layout_weight="1"/>
 
-                        </Spinner>
+
 
                     </LinearLayout>
 
@@ -204,7 +212,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <Button
-                            android:id="@+id/roomselection_checkinfomation"
+                            android:id="@+id/roomselection_checkinformation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"

@@ -34,11 +34,18 @@ public class RoomSelectionActivity extends AppCompatActivity{
 
     public static final String ROOM_NAME = "room_name";
     public static final String ROOM_IMAGE_ID = "room_image_id";
+
+    //Button控件
     Button timePickerButton;
+    Button chooseNumberButton;
+    Button chooseRoomButton;
+    Button chooseParticipatorButton;
+    Button checkInformationButton;
+    Button commitButton;
+
     //选择日期Dialog
     private DatePickerDialog datePickerDialog;
     //选择时间Dialog
-    private TimePickerDialog timePickerDialog1, timePickerDialog2;
 
     //日期属性
     private Calendar calendar;
@@ -49,7 +56,13 @@ public class RoomSelectionActivity extends AppCompatActivity{
     private int minute;     //分
     private int seconds;    //秒
 
+    //TextView控件
     TextView beginTime,endTime;
+    TextView showNumberView;
+    TextView showRoomView;
+
+    private int choice;
+    private AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +75,52 @@ public class RoomSelectionActivity extends AppCompatActivity{
         ImageView roomImageView = (ImageView)findViewById(R.id.roomselection_image_view);
 
         //寻找内部控件
-        timePickerButton = (Button)findViewById(R.id.roomselection_content_calendar) ;
+        timePickerButton = (Button)findViewById(R.id.roomselection_content_calendar);
         timePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDailog();  //选择时间
             }
         });
+
+        checkInformationButton = (Button)findViewById(R.id.roomselection_checkinformation);
+        checkInformationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RoomSelectionActivity.this,RoomDetailActivity.class);
+                intent.putExtra(RoomDetailActivity.ROOM_NAME,"会议室详情");
+                intent.putExtra(RoomDetailActivity.ROOM_IMAGE_ID,R.drawable.meeting_room_sample);
+                startActivity(intent);
+            }
+        });
+
+        commitButton = (Button)findViewById(R.id.roomselection_commit);
+        commitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(RoomSelectionActivity.this,"你已经成功预约了本次会议",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        chooseNumberButton =(Button)findViewById(R.id.roomselection_content_choose_number);
+        showNumberView = (TextView)findViewById(R.id.roomselection_content_shownumber);
+        chooseNumberButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPeopleNumberSelect();
+            }
+        });
+        chooseRoomButton =(Button)findViewById(R.id.roomselection_content_choose_room);
+        showRoomView = (TextView) findViewById(R.id.roomselection_content_showroom);
+        chooseRoomButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRoomSelect();
+            }
+        });
+        chooseParticipatorButton =(Button)findViewById(R.id.roomselection_content_choose_participator);
+
+        //日历设置
         calendar = Calendar.getInstance();
         Year = calendar.get(Calendar.YEAR);//获取当前年
         month = calendar.get(Calendar.MONTH)+1;//获取月份，加1是因为月份是从0开始计算的
@@ -76,17 +128,74 @@ public class RoomSelectionActivity extends AppCompatActivity{
         hour = calendar.get(Calendar.HOUR);//获取小时
         minute = calendar.get(Calendar.MINUTE);//获取分钟
         seconds = calendar.get(Calendar.SECOND);//获取秒钟
+
+        //toolbar设置
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        collapsingToolbar.setTitle("预约会议室");
+        collapsingToolbar.setTitle("会议详细设定");
         Glide.with(this).load(R.drawable.ic_launcher_background).into(roomImageView);
 
         //String roomContent = generateRoomContent(roomName);
         //roomContentText.setText(roomContent);
     }
+
+    /**
+     * 单选 dialog
+     */
+    private void showPeopleNumberSelect() {
+
+        //默认选中第一个
+        final String[] items = {"10人", "30人", "45人", "60人", "90人", "120人"};
+        choice = -1;
+        builder = new AlertDialog.Builder(this,R.style.dialog)
+                .setIcon(R.mipmap.ic_launcher).setTitle("选择会议人数")
+                .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        choice = i;
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (choice != -1) {
+                            Toast.makeText(RoomSelectionActivity.this, "你选择了" + items[choice], Toast.LENGTH_LONG).show();
+                            showNumberView.setText(items[choice]);
+                        }
+                    }
+                });
+        builder.create().show();
+    }
+
+    /**
+     * 单选 dialog
+     */
+    private void showRoomSelect() {
+
+        //默认选中第一个
+        final String[] items = {"7508", "9118", "9126", "9208", "9334", "9501"};
+        choice = -1;
+        builder = new AlertDialog.Builder(this,R.style.dialog).setIcon(R.mipmap.ic_launcher).setTitle("选择会议室编号")
+                .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        choice = i;
+                    }
+                }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (choice != -1) {
+                            Toast.makeText(RoomSelectionActivity.this, "你选择了" + items[choice], Toast.LENGTH_LONG).show();
+                            showRoomView.setText(items[choice]);
+                        }
+                    }
+                });
+        builder.create().show();
+    }
+
     private void showDailog() {
         datePickerDialog = new DatePickerDialog(
                 this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
@@ -167,10 +276,28 @@ public class RoomSelectionActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case android.R.id.home:
-                finish();
+                showTips();  //提示用户未预约会议成功
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void showTips(){
+        builder = new AlertDialog.Builder(this,R.style.dialog)
+                .setIcon(R.mipmap.ic_launcher)
+                .setTitle("您未完成预约流程，确认放弃操作么？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ;
+                    }
+                });
+        builder.create().show();
     }
     private List<String> getData() {
         // 数据源
@@ -180,5 +307,5 @@ public class RoomSelectionActivity extends AppCompatActivity{
         dataList.add("南京");
         dataList.add("宜昌");
         return dataList;
-         }
+    }
 }
