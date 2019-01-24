@@ -17,7 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/ic_icon" />
         </RelativeLayout>
 
         <LinearLayout
@@ -207,7 +207,6 @@
                 android:background="@drawable/shape_login_bg"
                 android:text="扫描人脸"
                 android:textColor="@color/md_white_1000"
-                android:onClick="singUp"
                 android:textSize="16sp" />
 
         </LinearLayout>
