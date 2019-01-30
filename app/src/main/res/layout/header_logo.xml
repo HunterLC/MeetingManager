@@ -5,5 +5,4 @@
     android:layout_height="@dimen/materialviewpager_logoHeight"
     android:text="会议室管理系统"
     android:textSize="30sp"
-    android:textColor="@android:color/white"
-    android:fitsSystemWindows="true"/>
+    android:textColor="@android:color/white"/>

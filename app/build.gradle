@@ -20,7 +20,11 @@ android {
 
 dependencies {
     implementation 'com.github.florent37:materialviewpager:1.2.3'
-    implementation 'com.mikepenz:materialdrawer:5.9.0'
+    compile('com.mikepenz:materialdrawer:5.9.0') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+
+
 
 //dependencies
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
