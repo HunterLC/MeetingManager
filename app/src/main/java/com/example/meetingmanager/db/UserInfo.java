@@ -1,6 +1,8 @@
-package com.example.meetingmanager;
+package com.example.meetingmanager.db;
 
-public class UserInfo {
+import org.litepal.crud.DataSupport;
+
+public class UserInfo extends DataSupport {
     private String avatar;//用户头像
     private  int id;//用户编号
     private  String name;//用户姓名

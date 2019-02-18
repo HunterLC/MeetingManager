@@ -1,9 +1,11 @@
-package com.example.meetingmanager;
+package com.example.meetingmanager.db;
+
+import org.litepal.crud.DataSupport;
 
 import   java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MessageInfo {//消息信息
+public class MessageInfo extends DataSupport {//消息信息
     private  String  username;//用户名
     private  int     message_id;//消息id
     private  String  title;//消息标题
@@ -26,7 +28,7 @@ public class MessageInfo {//消息信息
         this.curdate = curdate;
     }
 
-    String getCurrentTime(){
+    public String getCurrentTime(){
         curdate =  new Date(System.currentTimeMillis());
         return String.valueOf(curdate);
 

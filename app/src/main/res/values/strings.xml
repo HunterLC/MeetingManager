@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">会议室管理系统</string>
+    <string name="app_name">会议室</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->

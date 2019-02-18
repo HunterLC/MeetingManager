@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.meetingmanager.db.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;

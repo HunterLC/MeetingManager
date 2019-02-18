@@ -1,8 +1,10 @@
-package com.example.meetingmanager;
+package com.example.meetingmanager.db;
+import org.litepal.crud.DataSupport;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class MeetingInfo implements Serializable{
+public class MeetingInfo extends DataSupport implements Serializable{
     String title; // 会议主题
     String description; //会议内容介绍
     String sponsor; // 会议发起人用户名

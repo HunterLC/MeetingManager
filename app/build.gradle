@@ -20,23 +20,21 @@ android {
 
 dependencies {
     implementation 'com.github.florent37:materialviewpager:1.2.3'
-    compile('com.mikepenz:materialdrawer:5.9.0') {
+    implementation('com.mikepenz:materialdrawer:5.9.0') {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
-
-
-
 //dependencies
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
     implementation 'com.jpardogo.materialtabstrip:library:1.1.0'
     implementation 'com.github.bumptech.glide:glide:4.0.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
     implementation group: 'com.android.support', name: 'cardview-v7', version: '28.0.0-alpha3'
     implementation 'com.android.support:design:27.1.0'
     implementation 'com.android.support:support-annotations:27.1.1'
-    compile 'com.mikepenz:google-material-typeface:2.2.0.1@aar'
-    compile 'com.mikepenz:fontawesome-typeface:4.6.0.3@aar'
+    implementation 'com.mikepenz:google-material-typeface:2.2.0.1@aar'
+    implementation 'com.mikepenz:fontawesome-typeface:4.6.0.3@aar'
     implementation 'com.android.support:recyclerview-v7:23.1.1'
-    compile('com.github.ganfra:material-spinner:2.0.0') {
+    implementation('com.github.ganfra:material-spinner:2.0.0') {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -52,4 +50,6 @@ dependencies {
     implementation files('libs/ageestimation.jar')
     implementation files('libs/genderestimation.jar')
     implementation 'com.guo.android_extend:android-extend:1.0.6'
+    implementation 'org.litepal.android:core:1.3.2'
+    implementation 'com.google.code.gson:gson:2.7'
 }
