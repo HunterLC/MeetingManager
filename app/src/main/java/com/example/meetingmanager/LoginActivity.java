@@ -9,6 +9,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.meetingmanager.gson.Login;
+import com.example.meetingmanager.util.HttpUtil;
+import com.example.meetingmanager.util.Utility;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 
 public class LoginActivity extends AppCompatActivity
@@ -39,8 +50,9 @@ public class LoginActivity extends AppCompatActivity
         faceLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this,TestActivity.class);
-                startActivity(intent);
+                requestLogin();
+                Intent intent = new Intent(LoginActivity.this,TestActivity.class); //人脸模块
+                //startActivity(intent);
             }
         });
 
@@ -64,6 +76,37 @@ public class LoginActivity extends AppCompatActivity
     public void singUp(View view)
     {
         mAnimView.startAnimation();
+    }
+    public void requestLogin(){
+        String loginUrl = "http://www.baidu.com";
+        HttpUtil.sendOkHttpRequest(loginUrl, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(LoginActivity.this,"获取登录信息失败",Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String responseText = response.body().string();
+                final Login login = Utility.handleLoginResponse(responseText);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(login != null && 200 == login.apiStatus){
+                            Toast.makeText(LoginActivity.this,login.result.Token,Toast.LENGTH_LONG).show();
+                        } else{
+                            Toast.makeText(LoginActivity.this,"获取登录信息失败",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 }
 
