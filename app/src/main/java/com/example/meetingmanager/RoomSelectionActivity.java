@@ -5,32 +5,28 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -51,9 +47,10 @@ public class RoomSelectionActivity extends AppCompatActivity{
     Button chooseParticipatorButton;
     Button checkInformationButton;
     Button commitButton;
-
+    Button chooseContinueButton;
     //选择日期Dialog
     private DatePickerDialog datePickerDialog;
+    private TimePickerDialog timePickerDialog1,timePickerDialog2;
     //选择时间Dialog
 
     //日期属性
@@ -64,12 +61,13 @@ public class RoomSelectionActivity extends AppCompatActivity{
     private int hour;       //时
     private int minute;     //分
     private int seconds;    //秒
-
+    private DatePicker datePicker;
+    private TimePicker timePicker1,timePicker2;
+    private String starttime=null;
     //TextView控件
     TextView beginTime,endTime;
     TextView showNumberView;
     TextView showRoomView;
-
     private int choice;
     private AlertDialog.Builder builder;
     @Override
@@ -85,6 +83,10 @@ public class RoomSelectionActivity extends AppCompatActivity{
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+        //datepicker=findViewById()
+        timePicker1=findViewById(R.id.meeting_starttime);
+        timePicker2=findViewById(R.id.meeting_endtime);
+        beginTime = (TextView)findViewById(R.id.roomselection_content_showtime) ;
         Intent intent = getIntent();
         //String roomName = intent.getStringExtra(ROOM_NAME);
         //int roomImageId = intent.getIntExtra(ROOM_IMAGE_ID,0);
@@ -100,7 +102,6 @@ public class RoomSelectionActivity extends AppCompatActivity{
                 showDailog();  //选择时间
             }
         });
-
         checkInformationButton = (Button)findViewById(R.id.roomselection_checkinformation);
         checkInformationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +134,7 @@ public class RoomSelectionActivity extends AppCompatActivity{
                 // 设置通知出现时的震动（如果 android 设备支持的话）
                 mChannel.enableVibration(true);
                 mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-               //最后在notificationmanager中创建该通知渠道
+                //最后在notificationmanager中创建该通知渠道
                 manager.createNotificationChannel(mChannel);
                 String CHANNEL_ID = "my_channel_01";
                 Notification notification = new Notification.Builder(RoomSelectionActivity.this)
@@ -146,7 +147,7 @@ public class RoomSelectionActivity extends AppCompatActivity{
                         .setChannelId(CHANNEL_ID)
                         .build();
                 manager.notify(1,notification);
-               Toast.makeText(RoomSelectionActivity.this,"你已经成功预约了本次会议",Toast.LENGTH_SHORT).show();
+                Toast.makeText(RoomSelectionActivity.this,"你已经成功预约了本次会议",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -164,6 +165,13 @@ public class RoomSelectionActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 showRoomSelect();
+            }
+        });
+        chooseContinueButton = (Button)findViewById(R.id.roomselection_content_choose_continue);
+        chooseContinueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeSlice();
             }
         });
         chooseParticipatorButton =(Button)findViewById(R.id.roomselection_content_choose_participator);
@@ -217,7 +225,28 @@ public class RoomSelectionActivity extends AppCompatActivity{
                 });
         builder.create().show();
     }
+    private void showTimeSlice() {
 
+        //默认选中第一个
+        final String[] items = {"1(30min)", "2(1h)", "3(1.5h)", "4(2h)", "5(2.5h)", "6(3h)"};
+        choice = -1;
+        builder = new AlertDialog.Builder(this,R.style.dialog).setIcon(R.mipmap.ic_launcher).setTitle("选择持续时间")
+                .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        choice = i;
+                    }
+                }).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (choice != -1) {
+                            Toast.makeText(RoomSelectionActivity.this, "你选择了" + items[choice], Toast.LENGTH_LONG).show();
+                            showRoomView.setText(items[choice]);
+                        }
+                    }
+                });
+        builder.create().show();
+    }
     /**
      * 单选 dialog
      */
@@ -243,17 +272,26 @@ public class RoomSelectionActivity extends AppCompatActivity{
                 });
         builder.create().show();
     }
+    public String getCurrentDate(){
+        StringBuilder builder=new StringBuilder();
+        builder.append(datePicker.getYear()+"年");
+        builder.append(datePicker.getMonth()+1+"月");
+        builder.append((datePicker.getDayOfMonth())+"日");
+        return builder.toString();
 
+    }
     private void showDailog() {
         datePickerDialog = new DatePickerDialog(
                 this,R.style.MyDatePickerDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 //monthOfYear 得到的月份会减1所以我们要加1
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 String time = String.valueOf(year) + "　" + String.valueOf(monthOfYear + 1) + "  " + Integer.toString(dayOfMonth);
-                beginTime = (TextView)findViewById(R.id.roomselection_content_showtime) ;
-                beginTime.setText("当前时间："+year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日   "+hour+":"+minute+":"+seconds);
-                Toast.makeText(RoomSelectionActivity.this, "当前时间："+year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日   "+hour+":"+minute+":"+seconds, Toast.LENGTH_SHORT).show();
+                beginTime.setText("当前时间："+year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日"+hour+":"+minute+":"+seconds);
+                beginTime.setText(calendar.getTime().toString());
                 Year = year;
                 month = monthOfYear + 1;
                 day = dayOfMonth;
@@ -264,21 +302,98 @@ public class RoomSelectionActivity extends AppCompatActivity{
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH));
         //设置起始日期和结束日期
-        DatePicker datePicker = datePickerDialog.getDatePicker();
+        datePickerDialog.setTitle("选择日期");
+        datePicker = datePickerDialog.getDatePicker();
         datePicker.setMinDate(System.currentTimeMillis());
         datePicker.setMaxDate(System.currentTimeMillis()+518400000);
         datePickerDialog.show();
+
         datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        showTime1();
+                        Toast.makeText(RoomSelectionActivity.this,getCurrentDate() , Toast.LENGTH_SHORT).show();
+                        // String ass=getCurrentDate();
+                        // System.out.print(ass);
+                        //beginTime.setText(ass);
+                        setBeginTime();
+
                     }
                 });
         //自动弹出键盘问题解决
         datePickerDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
+    private void setBeginTime(){//设置开始时间
+        timePickerDialog1 =new TimePickerDialog(this, R.style.MyDatePickerDialogTheme, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY,hour);
+                calendar.set(Calendar.MINUTE,minute );
+                if(minute==0)
+                    beginTime.setText(getCurrentDate()+" "+hourOfDay+"时"+"00"+"分");
+                else
+                    beginTime.setText(getCurrentDate()+" "+hourOfDay+"时"+minute+"分");
+                //Toast.makeText(RoomSelectionActivity.this,hourOfDay+":"+minute,Toast.LENGTH_SHORT).show();
+            }
+        },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true);
+        timePickerDialog1.setTitle("会议开始时间");
+       /* timePickerDialog1.setButton(DatePickerDialog.BUTTON_POSITIVE, "确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(RoomSelectionActivity.this,"21212",Toast.LENGTH_SHORT).show();
+                setEndTime();
+            }
+        });*/
+        timePickerDialog1.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
 
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+
+                });
+        timePickerDialog1.show();
+    }
+   /* private void setEndTime(){//设置结束时间
+        timePickerDialog2 =new TimePickerDialog(this, R.style.MyDatePickerDialogTheme, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY,hour);
+                calendar.set(Calendar.MINUTE,minute );
+                Toast.makeText(RoomSelectionActivity.this,hourOfDay+":"+minute,Toast.LENGTH_SHORT).show();
+            }
+        },calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true);
+        timePickerDialog2.setTitle("会议结束时间");
+        timePickerDialog2.show();
+        timePickerDialog2.setButton(DialogInterface.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       Toast.makeText(RoomSelectionActivity.this,"预约时间已经提交",Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }*/
+    /*private void showTime1() {//弹出开始时间界面
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_start_time, null);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("选择时间");
+        builder.setView(view);
+        // timePicker1.setIs24HourView(true);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                 beginTime.setText("31133");
+                 //System.out.println(getStartTime());
+                // Toast.makeText(RoomSelectionActivity.this,getStartTime(), Toast.LENGTH_SHORT).show();
+
+              showTime2();
+            }
+        });
+        builder.setNegativeButton("取消", null);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        datePickerDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
     private void showTime2() {//弹出结束时间界面
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_end_time, null);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -287,8 +402,9 @@ public class RoomSelectionActivity extends AppCompatActivity{
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(RoomSelectionActivity.this,
-                        "预约时间已提交", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RoomSelectionActivity.this, "当前时间："+"年"+"月"+"日   "+hour+":"+minute+":"+seconds, Toast.LENGTH_SHORT).show();
+               Toast.makeText(RoomSelectionActivity.this,
+                      "预约时间已提交", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("取消", null);
@@ -296,23 +412,8 @@ public class RoomSelectionActivity extends AppCompatActivity{
         dialog.show();
         datePickerDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
+    */
 
-    private void showTime1() {//弹出开始时间界面
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_start_time, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("选择时间");
-        builder.setView(view);
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                showTime2();
-            }
-        });
-        builder.setNegativeButton("取消", null);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        datePickerDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-    }
     private String generateRoomContent(String roomName){
         StringBuilder roomContent = new StringBuilder();
         for(int i = 0; i <500 ; i++){

@@ -74,136 +74,190 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_margin="8dp">
-                        <TextView
-                            android:id="@+id/roomselection_content_bt"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:text="选择开始时间"
-                            android:textSize="15sp"/>
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="9">
+                            <TextView
+                                android:id="@+id/roomselection_content_bt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="会议开始时间"
+                                android:textSize="15sp"/>
 
-                        <TextView
-                            android:id="@+id/roomselection_content_showtime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2019-01-20 19:00:00"
-                            android:layout_weight="6"/>
+                            <TextView
+                                android:id="@+id/roomselection_content_showtime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2019-01-20 19:00:00"/>
 
+                        </LinearLayout>
                         <Button
                             android:id="@+id/roomselection_content_calendar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="选择时间"
+                            android:text="选择开始时间"
                             android:background="@drawable/selector_btn_bg"
-                            android:layout_weight="2"/>
-
+                            android:layout_weight="0"/>
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/blue" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_margin="8dp">
-                        <TextView
-                            android:id="@+id/roomselection_content_ct"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="预计结束时间"
-                            android:textSize="15sp"/>
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="9">
+                            <TextView
+                                android:id="@+id/roomselection_content_ct"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="预计结束时间"
+                                android:textSize="15sp"/>
 
-                        <TextView
-                            android:id="@+id/roomselection_content_continuetime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1 hour"
-                            android:layout_weight="7"/>
-
-                        <ImageView
+                            <TextView
+                                android:id="@+id/roomselection_content_continuetime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 hour"/>
+                        </LinearLayout>
+                        <Button
                             android:id="@+id/roomselection_content_choose_continue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-
+                            android:text="选择持续时间"
+                            android:background="@drawable/selector_btn_bg"
+                            android:layout_weight="0"/>
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/blue" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_margin="8dp">
-                        <TextView
-                            android:id="@+id/roomselection_content_cp"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="选择容量人数"
-                            android:textSize="15sp"/>
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="9">
+                            <TextView
+                                android:id="@+id/roomselection_content_cp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="会议室规模"
+                                android:textSize="15sp"/>
 
-                        <TextView
-                            android:id="@+id/roomselection_content_shownumber"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="30 人"
-                            android:layout_weight="8"/>
-
+                            <TextView
+                                android:id="@+id/roomselection_content_shownumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="30 人"/>
+                        </LinearLayout>
                         <Button
                             android:id="@+id/roomselection_content_choose_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="选择人数"
+                            android:text="选择容量人数"
                             android:background="@drawable/selector_btn_bg"
-                            android:layout_weight="1"/>
-
+                            android:layout_weight="0"/>
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/blue" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_margin="8dp">
-                        <TextView
-                            android:id="@+id/roomselection_content_cr"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="空闲会议室   "
-                            android:textSize="15sp"/>
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="9">
+                            <TextView
+                                android:id="@+id/roomselection_content_cr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="会议室编号"
+                                android:textSize="15sp"/>
 
-                        <TextView
-                            android:id="@+id/roomselection_content_showroom"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="9208"
-                            android:layout_weight="7"/>
-
+                            <TextView
+                                android:id="@+id/roomselection_content_showroom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="9208"/>
+                        </LinearLayout>
                         <Button
                             android:id="@+id/roomselection_content_choose_room"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="选择房间"
+                            android:text="选择空闲房间"
                             android:background="@drawable/selector_btn_bg"
-                            android:layout_weight="1"/>
-
+                            android:layout_weight="0"/>
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@color/blue" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_margin="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="参会人员"
-                            android:layout_weight="8"
-                            android:textSize="15sp"/>
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="9">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="参会人员"
+                                android:textSize="15sp"/>
+                        </LinearLayout>
                         <Button
                             android:id="@+id/roomselection_content_choose_participator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="添加人员"
+                            android:text="添加参会人员"
                             android:background="@drawable/selector_btn_bg"
-                            android:layout_weight="1"/>
-
-
+                            android:layout_weight="0"/>
 
                     </LinearLayout>
 
