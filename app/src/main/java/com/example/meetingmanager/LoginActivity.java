@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity
 
     private TransitionView mAnimView;
     Button faceLogin ;
+    public static String LOGIN_SUCCESS_TOKEN = null;  //全局使用的token
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,7 +51,7 @@ public class LoginActivity extends AppCompatActivity
         faceLogin = (Button)findViewById(R.id.btn_registered_facelogin);
         faceLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {    //相应人脸识别按键
                 requestLogin();
                 Intent intent = new Intent(LoginActivity.this,TestActivity.class); //人脸模块
                 //startActivity(intent);
@@ -73,12 +75,12 @@ public class LoginActivity extends AppCompatActivity
         finish();
     }
 
-    public void singUp(View view)
+    public void singUp(View view)  //相应登录按键
     {
         mAnimView.startAnimation();
     }
     public void requestLogin(){
-        String loginUrl = "http://www.baidu.com";
+        String loginUrl = "http://10.0.2.2/test.json";
         HttpUtil.sendOkHttpRequest(loginUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -86,7 +88,7 @@ public class LoginActivity extends AppCompatActivity
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(LoginActivity.this,"获取登录信息失败",Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this,"获取登录信息失败1",Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -94,14 +96,17 @@ public class LoginActivity extends AppCompatActivity
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 final String responseText = response.body().string();
+                Log.d("222",responseText);
+                //Toast.makeText(LoginActivity.this,responseText,Toast.LENGTH_LONG).show();
                 final Login login = Utility.handleLoginResponse(responseText);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if(login != null && 200 == login.apiStatus){
-                            Toast.makeText(LoginActivity.this,login.result.Token,Toast.LENGTH_LONG).show();
+                            LOGIN_SUCCESS_TOKEN = login.result.token;   //全局使用的token
+                            Toast.makeText(LoginActivity.this,login.result.token,Toast.LENGTH_LONG).show();
                         } else{
-                            Toast.makeText(LoginActivity.this,"获取登录信息失败",Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this,"获取登录信息失败2",Toast.LENGTH_LONG).show();
                         }
                     }
                 });

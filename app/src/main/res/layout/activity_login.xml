@@ -167,7 +167,7 @@
                     android:layout_weight="1"
                     android:text="注册"
                     android:textColor="@color/primary_dark"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
 
                 <TextView
@@ -179,7 +179,7 @@
                     android:layout_weight="1"
                     android:text="忘记密码？"
                     android:textColor="@color/primary_dark"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <Button

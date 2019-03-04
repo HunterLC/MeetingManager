@@ -12,9 +12,9 @@ public class Login {
     public Result result;
     public class Result{
         @SerializedName("role")
-        public String userRole;
+        public String role;
 
         @SerializedName("token")
-        public String Token;
+        public String token;
     }
 }
