@@ -1,6 +1,8 @@
 package com.example.meetingmanager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private AccountHeader headerResult = null;//head头布局
     private SectionDrawerItem sectionItem_user = null;//个人中心分组标签，无点击效果
     private PrimaryDrawerItem primaryItem_userInfo = null;//我的信息 菜单
+    private PrimaryDrawerItem primaryItem_logout = null;//退出登录 菜单
     private PrimaryDrawerItem primaryItem_history = null; //参会记录 菜单
     private ExpandableBadgeDrawerItem expandableItem_setting = null;//设置 菜单
     private SecondaryDrawerItem secondItem = null;//子item
@@ -204,7 +207,8 @@ public class MainActivity extends AppCompatActivity {
                         setPrimaryItem_history(),//历史会议记录 菜单条
                         setExpandableItem_setting(),
                         setSwitchItem1(),
-                        setSwitchItem2()
+                        setSwitchItem2(),
+                        setPrimaryItem_logout()
                 )//给抽屉添加item布局
                 .withShowDrawerOnFirstLaunch(false) //默认开启抽屉
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
@@ -220,6 +224,12 @@ public class MainActivity extends AppCompatActivity {
                             case 5:
                                 Intent intent = new Intent(MainActivity.this,SpinnerActivity.class);
                                 startActivity(intent);
+                            case 50:
+                                SharedPreferences sharedPreferences = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
+                                sharedPreferences.edit().clear().apply();
+                                Intent intentLogin = new Intent(MainActivity.this,LoginActivity.class);
+                                startActivity(intentLogin);
+                                finish();
                             default:
                                 Toast.makeText(MainActivity.this, drawerItem.getIdentifier() + " is clicked", Toast.LENGTH_SHORT).show();
                                 break;
@@ -282,7 +292,8 @@ public class MainActivity extends AppCompatActivity {
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.ic_launcher_background)
                 .withTranslucentStatusBar(true) //半透明效果
-                .addProfiles(profile,profile1,profile2)
+               // .addProfiles(profile,profile1,profile2)
+                .addProfiles(profile)
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
@@ -334,6 +345,16 @@ public class MainActivity extends AppCompatActivity {
                 .withIdentifier(3)
                 .withSelectable(false);
         return primaryItem_history;
+    }
+
+    private PrimaryDrawerItem setPrimaryItem_logout() {
+        primaryItem_logout = new PrimaryDrawerItem()
+                .withName("退出登录")
+                .withDescription("")
+                .withIcon(GoogleMaterial.Icon.gmd_accounts_list_alt)
+                .withIdentifier(50)
+                .withSelectable(false);
+        return primaryItem_logout;
     }
 
 
