@@ -94,6 +94,12 @@ public class LoginActivity extends AppCompatActivity
     {
         requestLogin();
     }
+
+
+    public String toJson(String username,String password,String face) {
+        return "{\"username\":\"" + username + "\"," + "\"password\":\"" + password + "\","+"\"face\":\""+face+"\"}";
+    }
+
     public void requestLogin(){
         userAccount = (EditText)findViewById(R.id.Ed_uerPhoneNumber);
         userPassword = (EditText)findViewById(R.id.Ed_uerPassword);
@@ -105,8 +111,10 @@ public class LoginActivity extends AppCompatActivity
         spinKitView.setVisibility(View.VISIBLE);
         Toast.makeText(LoginActivity.this,"信息加载中...",Toast.LENGTH_SHORT).show();
         //网络请求
-        String loginUrl = "http://10.0.2.2/test.json";
-        HttpUtil.sendOkHttpRequest(loginUrl, new Callback() {
+        String loginUrl = "http://47.107.251.255/user/logIn";
+        String json = toJson(account,password,"asdasd");
+        Log.d("LoginActivity  json's value ",json);
+        HttpUtil.sendOkHttpRequest(loginUrl,json,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
@@ -143,6 +151,7 @@ public class LoginActivity extends AppCompatActivity
                             mAnimView.startAnimation();   //登陆成功动画
                             Toast.makeText(LoginActivity.this,login.result.token,Toast.LENGTH_LONG).show();
                         } else{
+                            spinKitView.setVisibility(View.INVISIBLE);//关闭加载动画
                             Toast.makeText(LoginActivity.this,"获取登录信息失败",Toast.LENGTH_LONG).show();
                         }
                     }
