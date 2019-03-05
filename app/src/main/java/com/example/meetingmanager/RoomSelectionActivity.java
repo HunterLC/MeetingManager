@@ -67,6 +67,7 @@ public class RoomSelectionActivity extends AppCompatActivity{
     //TextView控件
     TextView beginTime,endTime;
     TextView showNumberView;
+    TextView showContinueView;
     TextView showRoomView;
     private int choice;
     private AlertDialog.Builder builder;
@@ -168,6 +169,7 @@ public class RoomSelectionActivity extends AppCompatActivity{
             }
         });
         chooseContinueButton = (Button)findViewById(R.id.roomselection_content_choose_continue);
+        showContinueView = (TextView)findViewById(R.id.roomselection_content_continuetime);
         chooseContinueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -241,7 +243,7 @@ public class RoomSelectionActivity extends AppCompatActivity{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (choice != -1) {
                             Toast.makeText(RoomSelectionActivity.this, "你选择了" + items[choice], Toast.LENGTH_LONG).show();
-                            showRoomView.setText(items[choice]);
+                            showContinueView.setText(items[choice]);
                         }
                     }
                 });
